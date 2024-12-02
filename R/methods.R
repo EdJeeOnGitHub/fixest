@@ -2496,7 +2496,7 @@ residuals.fixest = resid.fixest
 predict.fixest = function(object, newdata, type = c("response", "link"), se.fit = FALSE,
                           interval = "none", level = 0.95, fixef = FALSE,
                           vs.coef = FALSE, sample = c("estimation", "original"),
-                          vcov = NULL, ssc = NULL, ...){
+                          vcov = NULL, ssc = NULL, return_X = FALSE, ...){
 
   # Checking the arguments
   if(is_user_level_call()){
@@ -2939,8 +2939,10 @@ predict.fixest = function(object, newdata, type = c("response", "link"), se.fit 
     }
 
   }
-
-  res
+  if (return_X) {
+    res = list(res = res, X = matrix_linear)
+  }
+  return(res)
 }
 
 
