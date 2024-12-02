@@ -2939,8 +2939,11 @@ predict.fixest = function(object, newdata, type = c("response", "link"), se.fit 
     }
 
   }
+
   if (return_X) {
-    res = list(res = res, X = matrix_linear)
+    var_keep = intersect(names(coef), colnames(matrix_linear))
+    sub_matrix_linear = matrix_linear[, var_keep, drop = FALSE]
+    res = list(res = res, X = sub_matrix_linear)
   }
   return(res)
 }
